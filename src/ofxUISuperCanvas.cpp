@@ -323,58 +323,56 @@ void ofxUISuperCanvas::onMouseDragged(ofMouseEventArgs& data)
 
 void ofxUISuperCanvas::saveSettings(string fileName)
 {
-    ofxXmlSettings *XML = new ofxXmlSettings();
-    XML->addTag("Canvas");
-    XML->pushTag("Canvas", 0);
-    XML->setValue("Kind", getKind(), 0);
-    XML->setValue("Name", getName(), 0);
-    XML->setValue("IsMinified", (bIsMinified ? 1 : 0), 0);
-    XML->setValue("XPosition", rect->getX(), 0);
-    XML->setValue("YPosition", rect->getY(), 0);
-    XML->popTag();
+    ofXml XML;
+
+	auto CanvasTag = XML.appendChild("Canvas");
+	{
+		CanvasTag.appendChild("Kind").set(getKind());
+		CanvasTag.appendChild("Name").set(getName());
+		CanvasTag.appendChild("IsMinified").set(bIsMinified ? 1 : 0);
+		CanvasTag.appendChild("XPosition").set(rect->getX());
+		CanvasTag.appendChild("YPosition").set(rect->getY());
+	}
+	
     for(int i = 0; i < widgetsWithState.size(); i++)
     {
-        int index = XML->addTag("Widget");
-        if(XML->pushTag("Widget", index))
-        {
-            XML->setValue("Kind", widgetsWithState[i]->getKind(), 0);
-            XML->setValue("Name", widgetsWithState[i]->getName(), 0);
-            widgetsWithState[i]->saveState(XML);
-        }
-        XML->popTag();
+		auto WidgetTag = XML.appendChild("Widget");
+		{
+			WidgetTag.appendChild("Kind").set(widgetsWithState[i]->getKind());
+			WidgetTag.appendChild("Name").set(widgetsWithState[i]->getName());
+			widgetsWithState[i]->saveState(WidgetTag);
+		}
     }
-    XML->saveFile(fileName);
-    delete XML;
+    XML.save(fileName);
 }
 
 void ofxUISuperCanvas::loadSettings(string fileName)
 {
-    ofxXmlSettings *XML = new ofxXmlSettings();
-    XML->loadFile(fileName);
-    int widgetTags = XML->getNumTags("Widget");
-    for(int i = 0; i < widgetTags; i++)
-    {
-        XML->pushTag("Widget", i);
-        string name = XML->getValue("Name", "NULL", 0);
-        ofxUIWidget *widget = getWidget(name);
-        if(widget != NULL && widget->hasState())
-        {
-            widget->loadState(XML);
-            if(bTriggerWidgetsUponLoad)
-            {
-                triggerEvent(widget);
-            }
-        }
-        XML->popTag();
-    }
-    XML->pushTag("Canvas", 0);
-    int value = XML->getValue("IsMinified", (bIsMinified ? 1 : 0), 0);
-    setMinified((value ? 1 : 0));
-    rect->setX(XML->getValue("XPosition", rect->getX(), 0));
-    rect->setY(XML->getValue("YPosition", rect->getY(), 0));
-    XML->popTag();
+	ofXml XML;
+	XML.load(fileName);
+	if (XML) {
+		auto WidgetTags = XML.getChildren("Widget");
+		for (auto &WidgetTag : WidgetTags) {
+			string name = WidgetTag.getChild("Name").getValue();
+			ofxUIWidget *widget = getWidget(name);
+			if (widget != NULL && widget->hasState()) {
+				widget->loadState(WidgetTag);
+				if (bTriggerWidgetsUponLoad) {
+					triggerEvent(widget);
+				}
+			}
+		}
+	}
+
+	auto CanvasTag = XML.getChild("Canvas");
+	if (CanvasTag) {
+		int value = CanvasTag.getChild("IsMinified").getBoolValue();
+		setMinified((value ? 1 : 0));
+		rect->setX(CanvasTag.getChild("XPosition").getFloatValue());
+		rect->setY(CanvasTag.getChild("YPosition").getFloatValue());
+	}
+
     hasKeyBoard = false;
-    delete XML;
 }
 
 #endif

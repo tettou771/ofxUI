@@ -467,14 +467,14 @@ string ofxUINumberDialer::numToString(float value, int precision, int width, cha
 
 #ifndef OFX_UI_NO_XML
 
-void ofxUINumberDialer::saveState(ofxXmlSettings *XML)
+void ofxUINumberDialer::saveState(ofXml &XML)
 {
-    XML->setValue("Value", getValue(), 0);
+    XML.appendChild("Value").set(getValue());
 }
 
-void ofxUINumberDialer::loadState(ofxXmlSettings *XML)
+void ofxUINumberDialer::loadState(ofXml &XML)
 {
-    setValue(XML->getValue("Value", getValue(), 0));
+    setValue(XML.getChild("Value").getFloatValue());
 }
 
 #endif

@@ -708,12 +708,12 @@ ofxUIWidget* ofxUIWidget::unbindAllKeys()
 
 #ifndef OFX_UI_NO_XML
 
-void ofxUIWidget::saveState(ofxXmlSettings *XML)
+void ofxUIWidget::saveState(ofXml &XML)
 {
     
 }
 
-void ofxUIWidget::loadState(ofxXmlSettings *XML)
+void ofxUIWidget::loadState(ofXml &XML)
 {
     
 }

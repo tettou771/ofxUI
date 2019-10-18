@@ -421,19 +421,17 @@ void ofxUICanvas::copyCanvasProperties(ofxUICanvas *styler) {
 
 void ofxUICanvas::saveSettings(string fileName)
 {
-    ofxXmlSettings *XML = new ofxXmlSettings();
+    ofXml XML;
     int len = widgetsWithState.size();
     for(int i = 0; i < len; ++i) {
-        int index = XML->addTag("Widget");
-        if(XML->pushTag("Widget", index)) {
-            XML->setValue("Kind", widgetsWithState[i]->getKind(), 0);
-            XML->setValue("Name", widgetsWithState[i]->getName(), 0);
+        auto WidgetTag = XML.appendChild("Widget");
+        if(WidgetTag) {
+            XML.appendChild("Kind").set(widgetsWithState[i]->getKind());
+            XML.appendChild("Name").set(widgetsWithState[i]->getName());
             widgetsWithState[i]->saveState(XML);
         }
-        XML->popTag();
     }
-    XML->saveFile(fileName);
-    delete XML;
+    XML.save(fileName);
 }
 
 void ofxUICanvas::setTriggerWidgetsUponLoad(bool _bTriggerWidgetsUponLoad)
@@ -448,12 +446,11 @@ bool ofxUICanvas::getTriggerWidgetsUponLoad()
 
 void ofxUICanvas::loadSettings(string fileName)
 {
-    ofxXmlSettings *XML = new ofxXmlSettings();
-    XML->loadFile(fileName);
-    int widgetTags = XML->getNumTags("Widget");
-    for(int i = 0; i < widgetTags; ++i) {
-        XML->pushTag("Widget", i);
-        string name = XML->getValue("Name", "NULL", 0);
+    ofXml XML;
+    XML.load(fileName);
+    auto WidgetTags = XML.getChildren("Widget");
+    for(auto &WidgetTag : WidgetTags) {
+        string name = WidgetTag.getChild("Name").getValue();
         ofxUIWidget *widget = getWidget(name);
         if(widget != NULL && widget->hasState()) {
             widget->loadState(XML);
@@ -461,10 +458,8 @@ void ofxUICanvas::loadSettings(string fileName)
                 triggerEvent(widget);
             }
         }
-        XML->popTag();
     }
     hasKeyBoard = false;
-    delete XML;
 }
 
 #endif

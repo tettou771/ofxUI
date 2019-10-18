@@ -47,8 +47,8 @@ public:
     bool isDraggable();
     bool hasState(){ return true; };
 #ifndef OFX_UI_NO_XML
-    virtual void saveState(ofxXmlSettings *XML);
-    virtual void loadState(ofxXmlSettings *XML);
+    virtual void saveState(ofXml &XML);
+    virtual void loadState(ofXml &XML);
 #endif    
     
 protected: 

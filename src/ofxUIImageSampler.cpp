@@ -217,23 +217,23 @@ bool ofxUIImageSampler::isDraggable()
 
 #ifndef OFX_UI_NO_XML
 
-void ofxUIImageSampler::saveState(ofxXmlSettings *XML)
+void ofxUIImageSampler::saveState(ofXml &XML)
 {
-    XML->setValue("XValue", getValue().x, 0);
-    XML->setValue("YValue", getValue().y, 0);
-    XML->setValue("RColor", getColor().r, 0);
-    XML->setValue("GColor", getColor().g, 0);
-    XML->setValue("BColor", getColor().b, 0);
-    XML->setValue("AColor", getColor().a, 0);
+	XML.appendChild("XValue").set(getValue().x);
+	XML.appendChild("YValue").set(getValue().y);
+	XML.appendChild("RColor").set(getColor().r);
+	XML.appendChild("GColor").set(getColor().g);
+	XML.appendChild("BColor").set(getColor().b);
+	XML.appendChild("AColor").set(getColor().a);
 }
 
-void ofxUIImageSampler::loadState(ofxXmlSettings *XML)
+void ofxUIImageSampler::loadState(ofXml &XML)
 {
-    setValue(ofxUIVec2f(XML->getValue("XValue", getValue().x, 0), XML->getValue("YValue", getValue().y, 0)));
-    setColor(ofxUIColor(XML->getValue("RColor", getColor().r, 0),
-                        XML->getValue("GColor", getColor().g, 0),
-                        XML->getValue("BColor", getColor().b, 0),
-                        XML->getValue("AColor", getColor().a, 0)));
+	setValue(ofxUIVec2f(XML.getChild("XValue").getFloatValue(), XML.getChild("YValue").getFloatValue()));
+    setColor(ofxUIColor(XML.getChild("RColor").getFloatValue(),
+                        XML.getChild("GColor").getFloatValue(),
+                        XML.getChild("BColor").getFloatValue(),
+                        XML.getChild("AColor").getFloatValue()));
 }
 
 #endif

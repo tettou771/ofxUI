@@ -402,15 +402,15 @@ void ofxUI2DPad::setLabelPrecision(int _precision)
 
 #ifndef OFX_UI_NO_XML
 
-void ofxUI2DPad::saveState(ofxXmlSettings *XML)
+void ofxUI2DPad::saveState(ofXml &XML)
 {
-    XML->setValue("XValue", getScaledValue().x, 0);
-    XML->setValue("YValue", getScaledValue().y, 0);
+	XML.appendChild("XValue").set(getScaledValue().x);
+	XML.appendChild("YValue").set(getScaledValue().y);
 }
 
-void ofxUI2DPad::loadState(ofxXmlSettings *XML)
+void ofxUI2DPad::loadState(ofXml &XML)
 {
-    setValue(ofxUIVec3f(XML->getValue("XValue", getScaledValue().x, 0), XML->getValue("YValue", getScaledValue().y, 0)));
+	setValue(ofxUIVec3f(XML.getChild("XValue").getFloatValue(), XML.getChild("YValue").getFloatValue(), 0));
 }
 
 #endif

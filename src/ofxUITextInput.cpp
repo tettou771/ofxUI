@@ -528,14 +528,14 @@ void ofxUITextInput::recalculateDisplayString()
 
 #ifndef OFX_UI_NO_XML
 
-void ofxUITextInput::saveState(ofxXmlSettings *XML)
+void ofxUITextInput::saveState(ofXml &XML)
 {
-    XML->setValue("Value", getTextString(), 0);    
+    XML.appendChild("Value").set(getTextString());    
 }
 
-void ofxUITextInput::loadState(ofxXmlSettings *XML)
+void ofxUITextInput::loadState(ofXml &XML)
 {
-    setTextString(XML->getValue("Value", getTextString(), 0));
+    setTextString(XML.getChild("Value").getValue());
     setInputTriggerType(OFX_UI_TEXTINPUT_ON_LOAD);
 }
 

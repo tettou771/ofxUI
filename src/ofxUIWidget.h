@@ -27,10 +27,6 @@
 #include "ofxUIWrapper.h"
 #include "ofxUIDefines.h"
 
-#ifndef OFX_UI_NO_XML
-    #include "ofxXmlSettings.h"
-#endif 
-
 class ofxUIWidget           
 {
 public:
@@ -179,8 +175,8 @@ public:
 
 #ifndef OFX_UI_NO_XML
     
-    virtual void saveState(ofxXmlSettings *XML);
-    virtual void loadState(ofxXmlSettings *XML);
+    virtual void saveState(ofXml &XML);
+    virtual void loadState(ofXml &XML);
     
 #endif
     

@@ -583,17 +583,16 @@ bool ofxUIRangeSlider::isDraggable()
 
 #ifndef OFX_UI_NO_XML
 
-void ofxUIRangeSlider::saveState(ofxXmlSettings *XML)
+void ofxUIRangeSlider::saveState(ofXml &XML)
 {
-    XML->setValue("HighValue", getValueHigh(), 0);
-    XML->setValue("LowValue", getValueLow(), 0);
-
+	XML.appendChild("HighValue").set(getValueHigh());
+	XML.appendChild("LowValue").set(getValueLow());
 }
 
-void ofxUIRangeSlider::loadState(ofxXmlSettings *XML)
+void ofxUIRangeSlider::loadState(ofXml &XML)
 {
-    setValueHigh(XML->getValue("HighValue", getValueHigh(), 0));
-    setValueLow(XML->getValue("LowValue", getValueLow(), 0));
+	setValueHigh(XML.getChild("HighValue").getFloatValue());
+	setValueHigh(XML.getChild("LowValue").getFloatValue());
 }
 
 #endif

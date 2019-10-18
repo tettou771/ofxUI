@@ -24,10 +24,6 @@
 
 #pragma once
 
-#ifndef OFX_UI_NO_XML
-    #include "ofxXmlSettings.h"
-#endif
-
 #ifdef TARGET_OF_IOS
     #define OFX_UI_FONT_NAME "GUI/Helvetica.ttf"
 #else

@@ -479,48 +479,49 @@ void ofxUIDropDownList::setSingleSelected(int index){
 
 #ifndef OFX_UI_NO_XML
 
-void ofxUIDropDownList::saveState(ofxXmlSettings *XML)
+void ofxUIDropDownList::saveState(ofXml &XML)
 {
-    XML->setValue("Open", (isOpen() ? 1 : 0), 0);
-    int index = XML->addTag("Selected");
-    if(XML->pushTag("Selected", index)) {
-        int cnt = 0;
-        for(vector<ofxUIWidget *>::iterator it = selected.begin(); it != selected.end(); ++it) {
-            ofxUILabelToggle *lt = (ofxUILabelToggle *) (*it);
-            XML->setValue("Name", lt->getName(), cnt++);
-        }
-    }
-    XML->popTag();
+    XML.appendChild("Open").set(isOpen() ? 1 : 0);
+	auto SelectedTag = XML.appendChild("Selected");
+	{
+		for (vector<ofxUIWidget *>::iterator it = selected.begin(); it != selected.end(); ++it) {
+			ofxUILabelToggle *lt = (ofxUILabelToggle *)(*it);
+			SelectedTag.appendChild("Name").set(lt->getName());
+		}
+	}
 }
 
-void ofxUIDropDownList::loadState(ofxXmlSettings *XML)
+void ofxUIDropDownList::loadState(ofXml &XML)
 {
     selected.clear();
     selectedIndeces.clear();
     singleSelected = nullptr;
     
-    int value = XML->getValue("Open", (isOpen() ? 1 : 0), 0);
-    if(value) { open(); } else { close(); }
-    XML->pushTag("Selected", 0);
-    int widgetTags = XML->getNumTags("Name");
-    for(int i = 0; i < widgetTags; ++i) {
-        string selName = XML->getValue("Name", "NULL", i);
-        if(selName != "NULL"){
-            if(allowMultiple) {
-                for(unsigned int i = 0; i < toggles.size(); i++) {
-                    ofxUILabelToggle *t = toggles[i];
-                    if(t->getName() == selName) {
-                        t->setValue(true);
-                        selected.push_back(t);
-                        selectedIndeces.push_back(i);
-                    }
-                }
-            } else {
-                activateToggle(selName);
-            }
-        }
-    }
-    XML->popTag();
+	int value = XML.getChild("Open").getBoolValue();
+	if (value) { open(); }
+	else { close(); }
+	auto SelectedTag = XML.getChild("Selected");
+	if (SelectedTag) {
+		auto NameTags = SelectedTag.getChildren("Name");
+		for (auto &NameTag : NameTags) {
+			string selName = NameTag.getValue();
+			if (selName != "NULL") {
+				if (allowMultiple) {
+					for (unsigned int i = 0; i < toggles.size(); i++) {
+						ofxUILabelToggle *t = toggles[i];
+						if (t->getName() == selName) {
+							t->setValue(true);
+							selected.push_back(t);
+							selectedIndeces.push_back(i);
+						}
+					}
+				}
+				else {
+					activateToggle(selName);
+				}
+			}
+		}
+	}
 }
 
 #endif

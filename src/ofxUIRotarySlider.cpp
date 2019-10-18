@@ -488,14 +488,14 @@ bool ofxUIRotarySlider::isHit(float x, float y)
 
 #ifndef OFX_UI_NO_XML
 
-void ofxUIRotarySlider::saveState(ofxXmlSettings *XML)
+void ofxUIRotarySlider::saveState(ofXml &XML)
 {
-    XML->setValue("Value", getScaledValue(), 0);   
+    XML.appendChild("Value").set(getScaledValue());   
 }
 
-void ofxUIRotarySlider::loadState(ofxXmlSettings *XML)
+void ofxUIRotarySlider::loadState(ofXml &XML)
 {
-    setValue(XML->getValue("Value", getScaledValue(), 0));
+    setValue(XML.getChild("Value").getFloatValue());
 }
 
 #endif
