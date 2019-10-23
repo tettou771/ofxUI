@@ -7,6 +7,12 @@
 		<ClCompile Include="src\main.cpp">
 			<Filter>src</Filter>
 		</ClCompile>
+		<ClCompile Include="src\main.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\ofApp.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
 		<ClCompile Include="..\..\..\addons\ofxUI\src\ofxUI2DGraph.cpp">
 			<Filter>addons\ofxUI\src</Filter>
 		</ClCompile>
@@ -26,9 +32,6 @@
 			<Filter>addons\ofxUI\src</Filter>
 		</ClCompile>
 		<ClCompile Include="..\..\..\addons\ofxUI\src\ofxUICircleSlider.cpp">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxUI\src\ofxUICustomImageButton.cpp">
 			<Filter>addons\ofxUI\src</Filter>
 		</ClCompile>
 		<ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIDragableLabelButton.cpp">
@@ -59,9 +62,6 @@
 			<Filter>addons\ofxUI\src</Filter>
 		</ClCompile>
 		<ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIImageToggle.cpp">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIIntSlider.cpp">
 			<Filter>addons\ofxUI\src</Filter>
 		</ClCompile>
 		<ClCompile Include="..\..\..\addons\ofxUI\src\ofxUILabel.cpp">
@@ -145,18 +145,6 @@
 		<ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.cpp">
 			<Filter>addons\ofxUI\src</Filter>
 		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp">
-			<Filter>addons\ofxXmlSettings\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp">
-			<Filter>addons\ofxXmlSettings\libs</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp">
-			<Filter>addons\ofxXmlSettings\libs</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
-			<Filter>addons\ofxXmlSettings\libs</Filter>
-		</ClCompile>
 	</ItemGroup>
 	<ItemGroup>
 		<Filter Include="src">
@@ -171,17 +159,11 @@
 		<Filter Include="addons\ofxUI\src">
 			<UniqueIdentifier>{A00C2D23-6C11-BC86-3993-2CF0}</UniqueIdentifier>
 		</Filter>
-		<Filter Include="addons\ofxXmlSettings">
-			<UniqueIdentifier>{877F005D-13E6-0592-1D97-F2E3}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxXmlSettings\src">
-			<UniqueIdentifier>{CCB2AC63-49D2-977C-CFE8-AEAD}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxXmlSettings\libs">
-			<UniqueIdentifier>{687714A8-1662-FA1C-261F-50F0}</UniqueIdentifier>
-		</Filter>
 	</ItemGroup>
 	<ItemGroup>
+		<ClInclude Include="src\ofApp.h">
+			<Filter>src</Filter>
+		</ClInclude>
 		<ClInclude Include="src\ofApp.h">
 			<Filter>src</Filter>
 		</ClInclude>
@@ -207,9 +189,6 @@
 			<Filter>addons\ofxUI\src</Filter>
 		</ClInclude>
 		<ClInclude Include="..\..\..\addons\ofxUI\src\ofxUICircleSlider.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxUI\src\ofxUICustomImageButton.h">
 			<Filter>addons\ofxUI\src</Filter>
 		</ClInclude>
 		<ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIDefines.h">
@@ -243,9 +222,6 @@
 			<Filter>addons\ofxUI\src</Filter>
 		</ClInclude>
 		<ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIImageToggle.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIIntSlider.h">
 			<Filter>addons\ofxUI\src</Filter>
 		</ClInclude>
 		<ClInclude Include="..\..\..\addons\ofxUI\src\ofxUILabel.h">
@@ -332,17 +308,14 @@
 		<ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWidget.h">
 			<Filter>addons\ofxUI\src</Filter>
 		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWidgets.h">
+			<Filter>addons\ofxUI\src</Filter>
+		</ClInclude>
 		<ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.h">
 			<Filter>addons\ofxUI\src</Filter>
 		</ClInclude>
 		<ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWrapper.h">
 			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h">
-			<Filter>addons\ofxXmlSettings\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
-			<Filter>addons\ofxXmlSettings\libs</Filter>
 		</ClInclude>
 	</ItemGroup>
 	<ItemGroup>
